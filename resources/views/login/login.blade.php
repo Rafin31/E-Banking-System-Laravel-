@@ -37,7 +37,7 @@
                     <div class="form-input-content">
                         <div class="card login-form mb-0">
                             <div class="card-body pt-5">
-                                <a class="text-center" href="{{ route('login.login') }}">
+                                <a class="text-center" href="{{route('login.login')}}">
                                     <h4>LogIn</h4>
                                 </a>
 
@@ -53,6 +53,9 @@
                                     </div>
                                     <input type="submit" value="Sign in" class="btn login-form__btn submit w-100 ">
                                 </form>
+                                {{-- Errors --}}
+                                <div align='center' class="errors alert-danger">{{session('msg')}}</div>
+                                {{-- Errors end --}}
                                 <p class="mt-5 login-form__footer">Dont have account? <a
                                         href="{{ route('registration.register')}}" class="text-primary">Sign Up</a> now
                                 </p>
