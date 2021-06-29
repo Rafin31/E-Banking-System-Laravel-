@@ -5,6 +5,12 @@
 
 <body class="h-100">
 
+    <style>
+        .alert-danger {
+            text-align: center;
+        }
+    </style>
+
     <!--*******************
         Preloader start
     ********************-->
@@ -36,39 +42,67 @@
                                 </a>
 
                                 <form method="post" class="mt-5 mb-5 login-input">
+
                                     @csrf
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="User Name" required>
+                                        <input type="text" name="user_name" value="{{old('user_name')}}"
+                                            class="form-control" {{old('')}} placeholder="User Name" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('user_name')}}</div>
+                                    {{-- errors end --}}
+
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Phone Number" required>
+                                        <input type="text" value="{{old('phone_number')}}" name="phone_number"
+                                            class="form-control" placeholder="Phone Number" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('phone_number')}}</div>
+                                    {{-- errors end --}}
+
                                     <div class="form-group">
-                                        <input type="email" class="form-control" placeholder="Email" required>
+                                        <input type="email" value="{{old('email')}}" name="email" class="form-control"
+                                            placeholder="Email" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('email')}}</div>
+                                    {{-- errors end --}}
                                     <div class="form-group">
-                                        <input type="password" class="form-control" placeholder="Password" required>
+                                        <input type="password" name="password" class="form-control"
+                                            placeholder="Password" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('password')}}</div>
+                                    {{-- errors end --}}
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Confirm password" required>
+                                        <input type="password" name="con_password" class="form-control"
+                                            placeholder="Confirm password" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('con_password')}}</div>
+                                    {{-- errors end --}}
                                     <div class="form-group">
-                                        <input type="text" class="form-control" placeholder="Address" required>
+                                        <input type="text" name="address" value="{{old('address')}}"
+                                            class="form-control" placeholder="Address" required>
                                     </div>
+                                    {{-- errors --}}
+                                    <div class="alert-danger mb-4">{{$errors -> first('address')}}</div>
+                                    {{-- errors end --}}
                                     <div class="form-group row">
                                         <label class="col-lg-4 col-form-label" for="val-skill">User Type <span
                                                 class="text-danger">*</span>
                                         </label>
                                         <div class="col-lg-6">
-                                            <select class="form-control" id="val-skill" name="val-skill">
+                                            <select class="form-control" id="val-skill" name="user_type">
                                                 <option value="">User Type</option>
-                                                <option value="html">Clients</option>
-                                                <option value="html">Bank Manager</option>
-                                                <option value="css">Money exchange officer</option>
-                                                <option value="javascript">Customer care</option>
+                                                <option value="clients">Clients</option>
+                                                <option value="bank_manager">Bank Manager</option>
+                                                <option value="noney_exchange_officer">Money exchange officer</option>
+                                                <option value="admin">Admin</option>
                                             </select>
                                         </div>
                                     </div>
+                                    <div class="alert-danger mb-4">{{$errors -> first('user_type')}}</div>
                                     <button class="btn login-form__btn submit w-100">Sign in</button>
                                 </form>
                                 <p class="mt-5 login-form__footer">Have account <a href="{{ route('login.login')  }}"
