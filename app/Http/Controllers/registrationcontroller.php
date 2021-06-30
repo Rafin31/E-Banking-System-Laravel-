@@ -25,6 +25,7 @@ class registrationcontroller extends Controller
             $user->phone_number =  $req->phone_number;
             $user->profile_picture =  'null';
             $user->user_type =  $req->user_type;
+            $user->account_Status =  'active';
             $user->save();
 
             $list = usersModel::all()->last();

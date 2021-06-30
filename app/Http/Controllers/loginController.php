@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Models\loginModel;
 use App\Models\usersModel;
+use App\Models\requestsModel;
 
 class loginController extends Controller
 {
@@ -18,7 +19,7 @@ class loginController extends Controller
     public function logout(Request $req)
     {
         $req->session()->flush();
-        return view("login.login");
+        return redirect("/login");
     }
     public function loginVarify(loginForm $req)
     {
@@ -36,7 +37,6 @@ class loginController extends Controller
             $req->session()->put('user_type', $user['user_type']);
             return redirect()->route('user.dashbord');
         } else {
-
             $req->session()->flash('msg', 'invaild User Name or password');
             return redirect()->route('login.login');
         }

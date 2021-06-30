@@ -1,10 +1,38 @@
+<?php
+
+use Illuminate\Support\Facades\DB;
+use App\Models\loginModel;
+use App\Models\usersModel;
+use App\Models\requestsModel;
+
+if (session('user_type') == 'admin') {
+                //-----------------statistics--------------------------
+                $client_number = usersModel::where('user_type', '<=', 'clients')->count();
+                $stuff_number = usersModel::where('user_type', '!=', 'clients')->count();
+                $request_number = requestsModel::where('status', '<=', 'Pending')->count();
+
+                $data = [
+                    'client_number' =>  $client_number,
+                    'stuff_number' => $stuff_number,
+                    'request_number' => $request_number
+                ];
+             
+            }else {
+                $data = [
+                    'client_number' =>  0,
+                    'stuff_number' => 0,
+                    'request_number' => 0
+                ];
+            }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
 @include('head.head' , ['title' => " Welcome | Dashbord "] )
 
 <body>
-
     <!--*******************
         Preloader start
     ********************-->
@@ -70,47 +98,50 @@
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-1">
                                 <div class="card-body">
-                                    <h3 class="card-title text-white">Products Sold</h3>
+                                    <h3 class="card-title text-white">Active Clients</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">4565</h2>
-                                        <p class="text-white mb-0">Jan - March 2019</p>
+                                        <h2 class="text-white">{{$data['client_number']}}</h2>
+                                        <p class="text-white mb-0">
+                                            {{'Today is '  .now()->day .'-' .now()->format('F Y')}}
+                                        </p>
                                     </div>
-                                    <span class="float-right display-5 opacity-5"><i
-                                            class="fa fa-shopping-cart"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-2">
                                 <div class="card-body">
-                                    <h3 class="card-title text-white">Net Profit</h3>
+                                    <h3 class="card-title text-white">Active Stuff</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">$ 8541</h2>
-                                        <p class="text-white mb-0">Jan - March 2019</p>
+                                        <h2 class="text-white"> {{$data['stuff_number']}}</h2>
+                                        <p class="text-white mb-0">
+                                            {{'Today is '  .now()->day .'-' .now()->format('F Y')}}</p>
                                     </div>
-                                    <span class="float-right display-5 opacity-5"><i class="fa fa-money"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-3">
                                 <div class="card-body">
-                                    <h3 class="card-title text-white">New Customers</h3>
+                                    <h3 class="card-title text-white">Pending Requests</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">4565</h2>
-                                        <p class="text-white mb-0">Jan - March 2019</p>
+                                        <h2 class="text-white">{{$data['request_number']}}</h2>
+                                        <p class="text-white mb-0">
+                                            {{'Today is '  .now()->day .'-' .now()->format('F Y')}}</p>
+                                        </p>
                                     </div>
-                                    <span class="float-right display-5 opacity-5"><i class="fa fa-users"></i></span>
                                 </div>
                             </div>
                         </div>
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-4">
                                 <div class="card-body">
-                                    <h3 class="card-title text-white">Customer Satisfaction</h3>
+                                    <h3 class="card-title text-white">Clients Satisfaction</h3>
                                     <div class="d-inline-block">
                                         <h2 class="text-white">99%</h2>
-                                        <p class="text-white mb-0">Jan - March 2019</p>
+                                        <p class="text-white mb-0">
+                                            {{'Today is '  .now()->day .'-' .now()->format('F Y')}}</p>
+                                        </p>
                                     </div>
                                     <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
                                 </div>
@@ -122,16 +153,21 @@
                 <!-- #/ container -->
             </div>
         </div>
-        <!--**********************************
+    </div>
+
+
+
+    </div>
+    <!--**********************************
             Content body end
         ***********************************-->
 
 
-        <!--**********************************
+    <!--**********************************
             Footer start
         ***********************************-->
-        @include('footer.footer')
-        <!--**********************************
+    @include('footer.footer')
+    <!--**********************************
             Footer end
         ***********************************-->
     </div>

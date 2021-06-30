@@ -85,163 +85,65 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Delete</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure, You want to
-                                                                        delete?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Delete</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure, You want to
-                                                                        delete?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                            @foreach ($users as $user)
 
-                                            </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
+                                                <td>{{$user->id}}</td>
+                                                <td>{{$user->user_name}}</td>
+                                                <td><span class="badge badge-info px-2">{{$user->user_type}}</span>
+                                                </td>
+                                                <td>{{$user->address}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone_number}}</td>
                                                 <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Delete</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure, You want to
-                                                                        delete?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Delete</button>
+                                                    <span class="badge badge-success px-2">
+                                                        {{$user->account_Status}}</span>
+                                                </td>
+                                                <td>
+                                                    <form method="POST" action="{{url('/dashbord/deleteUser')}}">
+                                                        @csrf
+                                                        {{-- @method('DELETE') --}}
+                                                        <div class="bootstrap-modal">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal" data-target="#basicModal"
+                                                                onclick="updateId('{{$user->id}}')">Delete</button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="basicModal">
+                                                                <input type="hidden" id="delete_user_id"
+                                                                    name="delete_user_id" value="{{$user->id}}"></input>
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Confirmation</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal"><span>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Are you sure, You want
+                                                                            to
+                                                                            delete?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Delete</button>
+
+
+                                                                            {{-- <a type='submit' href="/dashbord/deleteUser"
+                                                                                class="btn btn-primary">Delete</a> --}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Delete</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure, You want to
-                                                                        delete?
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Delete</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                            @endforeach
 
                                         </tbody>
                                         <tfoot>
@@ -290,6 +192,12 @@
         Scripts
     ***********************************-->
     @include('scripts.scripts')
+
+    <script>
+        function updateId(id) {
+            $('#delete_user_id').val(id)
+        }
+    </script>
 
 </body>
 
