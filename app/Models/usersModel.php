@@ -17,4 +17,8 @@ class usersModel extends Model
     {
         return $this->hasOne(loginModel::class, 'id', 'id');
     }
+    public function request()
+    {
+        return $this->hasMany(requestsModel::class, 'id', 'id');
+    }
 }

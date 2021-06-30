@@ -84,44 +84,23 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach ($users as $user)
                                             <tr>
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
+                                                <td>{{$user->id}}</td>
+                                                <td>{{$user->user_name}}</td>
+                                                <td><span class="badge badge-info px-2">{{$user->user_type}}</span>
+                                                </td>
+                                                <td>{{$user->address}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone_number}}</td>
+                                                <td><span
+                                                        class="badge badge-success px-2">{{$user->account_Status}}</span>
+                                                </td>
                                             </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>3</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                            </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                            </tr>
+                                            @endforeach
 
                                         </tbody>
+
                                         <tfoot>
                                             <tr>
                                                 <th>User Id</th>

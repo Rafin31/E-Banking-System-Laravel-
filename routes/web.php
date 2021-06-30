@@ -13,7 +13,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "loginController@index");
+Route::get('/', function () {
+    return redirect('/login');
+});
 Route::get('/login', "loginController@index")->name("login.login");
 Route::get('/login/logout', "loginController@logout")->name("logout");
 Route::post('/login', "loginController@loginVarify");
@@ -29,10 +31,17 @@ Route::group(['middleware' => ['sessionCheck']], function () {
     //----------------------------Admin Check start here-----------------------------------------------
     Route::group(['middleware' => ['adminCheck']], function () {
         Route::get('/dashbord', "loginController@dashbord")->name("user.dashbord");
+
         Route::get('/dashbord/userList', "userController@userList")->name("user.user_list");
+
         Route::get('/dashbord/userServices', "userController@userServices")->name("user.services");
+
         Route::get('/dashbord/addUser', "userController@addUser")->name("user.add_user");
+        Route::post('/dashbord/addUser', "userController@insertUser");
+
         Route::get('/dashbord/deleteUser', "userController@deleteUser")->name("user.delete_user");
+        Route::post('/dashbord/deleteUser', "userController@destroy");
+
         Route::get('/dashbord/editUser', "userController@editUser")->name("user.edit_user");
         Route::get('/dashbord/blockUser', "userController@blockUser")->name("user.block_user");
         Route::get('/dashbord/pendingUser', "userController@pendingUser")->name("user.pending_user");
