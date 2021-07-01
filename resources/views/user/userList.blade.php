@@ -5,6 +5,13 @@
 
 <body>
 
+    <style>
+        .message {
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
+
     <!--*******************
             Preloader start
         ********************-->
@@ -65,6 +72,10 @@
             <!-- row -->
 
             <div class="container-fluid">
+                <div class="message alert-success">{{session("edit")}}</div>
+                <div class="message alert-success">{{session("unblock")}}</div>
+                <div class="message alert-danger">{{session("block")}}</div>
+                <div class="message alert-success">{{session("approve")}}</div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -93,8 +104,17 @@
                                                 <td>{{$user->address}}</td>
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->phone_number}}</td>
-                                                <td><span
-                                                        class="badge badge-success px-2">{{$user->account_Status}}</span>
+                                                <td>
+                                                    @if ($user->account_Status == 'pending')
+                                                    <span class="badge badge-warning px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @elseif ($user->account_Status == 'Block')
+                                                    <span class="badge badge-danger px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @else
+                                                    <span class="badge badge-success px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @endif
                                                 </td>
                                             </tr>
                                             @endforeach

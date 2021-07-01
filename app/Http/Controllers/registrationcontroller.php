@@ -25,7 +25,7 @@ class registrationcontroller extends Controller
             $user->phone_number =  $req->phone_number;
             $user->profile_picture =  'null';
             $user->user_type =  $req->user_type;
-            $user->account_Status =  'active';
+            $user->account_Status =  'pending';
             $user->save();
 
             $list = usersModel::all()->last();
@@ -37,6 +37,7 @@ class registrationcontroller extends Controller
             $login->user_name = $req->user_name;
             $login->password =  bcrypt($req->password);
             $login->user_type = $req->user_type;
+            $login->account_Status = 'pending';
             $login->save();
             DB::commit();
             return redirect()->route('login.login');
