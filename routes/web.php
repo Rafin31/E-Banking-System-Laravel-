@@ -43,9 +43,19 @@ Route::group(['middleware' => ['sessionCheck']], function () {
         Route::post('/dashbord/deleteUser', "userController@destroy");
 
         Route::get('/dashbord/editUser', "userController@editUser")->name("user.edit_user");
+        Route::get('/dashbord/completeEdit/{id}', "userController@completeEdit")->name("completeEdit");
+        Route::post('/dashbord/completeEdit/{id}', "userController@editingOparetion");
+
+
         Route::get('/dashbord/blockUser', "userController@blockUser")->name("user.block_user");
+        Route::post('/dashbord/blockUser', "userController@blockUserOparetion")->name("user.block_user");
+
         Route::get('/dashbord/pendingUser', "userController@pendingUser")->name("user.pending_user");
+        Route::post('/dashbord/pendingUser', "userController@pendingUserOparation");
+
         Route::get('/dashbord/unblockUser', "userController@unblockUser")->name("user.unblock_user");
+        Route::post('/dashbord/unblockUser', "userController@unblockOperation");
+
         Route::get('/dashbord/clientReq', "userController@clientReq")->name("user.client_req");
         Route::get('/dashbord/profile', "userController@profile")->name("user.profile");
         Route::get('/dashbord/editProfile', "userController@editProfile")->name("user.edit_profile");

@@ -7,6 +7,9 @@ use Illuminate\Support\Facades\DB;
 use App\Models\loginModel;
 use App\Models\usersModel;
 use Illuminate\Http\Request;
+use App\Http\Requests\editUser;
+
+
 
 class userController extends Controller
 {
@@ -63,7 +66,17 @@ class userController extends Controller
 
     public function blockUser()
     {
-        return view('user.blockUser');
+        $user = usersModel::where('account_Status', 'active')->get();
+        return view('user.blockUser')->with('user', $user);
+    }
+
+    public function blockUserOparetion(Request $request)
+    {
+        $user = usersModel::find($request->block_user_id);
+        $user->account_Status = 'Block';
+        $user->save();
+        $request->session()->flash('block', $request->block_user_id . " " . "Blocked Succesfully");
+        return redirect('/dashbord/userList');
     }
 
     public function changePass()
@@ -103,12 +116,63 @@ class userController extends Controller
 
     public function editUser()
     {
-        return view('user.editUser');
+        $user = usersModel::all();
+        return view('user.editUser')->with('users', $user);
     }
+
+    public function completeEdit($id)
+    {
+        $user = usersModel::find($id);
+        return view('user.completeEdit')->with('users', $user);
+    }
+
+    public function editingOparetion(editUser $req, $id)
+    {
+
+        DB::beginTransaction();
+        try {
+
+
+            $user = usersModel::find($id);
+            $user->user_name = $req->user_name;
+            $user->email = $req->email;
+            $user->address = $req->address;
+            $user->phone_number = $req->phone_number;
+            $user->save();
+
+            $login = loginModel::find($id);
+            $login->user_name = $req->user_name;
+            $login->save();
+            DB::commit();
+            $req->session()->flash('edit', $id . " " . "Edited Succesfully");
+            return redirect('/dashbord/userList');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            echo "Something Went wrong";
+            return redirect('/dashbord/userList');
+            //throw $th;
+        }
+
+
+        //return view('user.completeEdit')->with('users', $user);
+    }
+
+
 
     public function pendingUser()
     {
-        return view('user.pendingUser');
+        $user = usersModel::where('account_Status', 'pending')->get();
+        //print_r($user);
+        return view('user.pendingUser')->with('user', $user);
+    }
+    public function pendingUserOparation(Request $request)
+    {
+        $user = usersModel::find($request->approve_user_id);
+        $user->account_Status = 'active';
+        $user->save();
+        $request->session()->flash('approve', $request->approve_user_id . " " . "Approved Succesfully");
+        return redirect('/dashbord/userList');
+        //return view('user.pendingUser')->with('user', $user);
     }
 
     public function postNotices()
@@ -123,7 +187,18 @@ class userController extends Controller
 
     public function unblockUser()
     {
-        return view('user.unblockUser');
+        $user = usersModel::where('account_Status', 'Block')->get();
+        return view('user.unblockUser')->with('user', $user);
+    }
+
+    public function unblockOperation(Request $req)
+    {
+        //echo "done";
+        $user = usersModel::find($req->Unblock_user_id);
+        $user->account_Status = 'active';
+        $user->save();
+        $req->session()->flash('unblock', $req->Unblock_user_id . " " . "Unblocked Succesfully");
+        return redirect('/dashbord/userList');
     }
 
     public function userServices()

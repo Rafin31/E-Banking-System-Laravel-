@@ -7,14 +7,21 @@ use App\Models\requestsModel;
 
 if (session('user_type') == 'admin') {
                 //-----------------statistics--------------------------
-                $client_number = usersModel::where('user_type', '<=', 'clients')->count();
-                $stuff_number = usersModel::where('user_type', '!=', 'clients')->count();
+                $client_number = usersModel::where('user_type', '<=', 'clients')
+                                             ->where('account_Status', '<=', 'active')
+                                             ->count();
+                $stuff_number = usersModel::where('user_type', '!=', 'clients')
+                                             ->where('account_Status', '<=', 'active')
+                                             ->count();
                 $request_number = requestsModel::where('status', '<=', 'Pending')->count();
+                $pending_user = usersModel::where('account_Status',  'pending')->count();
+
 
                 $data = [
                     'client_number' =>  $client_number,
                     'stuff_number' => $stuff_number,
-                    'request_number' => $request_number
+                    'request_number' => $request_number,
+                    'pending_user'   => $pending_user
                 ];
              
             }else {
@@ -136,9 +143,9 @@ if (session('user_type') == 'admin') {
                         <div class="col-lg-3 col-sm-6">
                             <div class="card gradient-4">
                                 <div class="card-body">
-                                    <h3 class="card-title text-white">Clients Satisfaction</h3>
+                                    <h3 class="card-title text-white">Pending User</h3>
                                     <div class="d-inline-block">
-                                        <h2 class="text-white">99%</h2>
+                                        <h2 class="text-white">{{$data["pending_user"]}}</h2>
                                         <p class="text-white mb-0">
                                             {{'Today is '  .now()->day .'-' .now()->format('F Y')}}</p>
                                         </p>
