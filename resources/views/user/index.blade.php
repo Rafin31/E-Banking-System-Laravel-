@@ -150,7 +150,6 @@ if (session('user_type') == 'admin') {
                                             {{'Today is '  .now()->day .'-' .now()->format('F Y')}}</p>
                                         </p>
                                     </div>
-                                    <span class="float-right display-5 opacity-5"><i class="fa fa-heart"></i></span>
                                 </div>
                             </div>
                         </div>

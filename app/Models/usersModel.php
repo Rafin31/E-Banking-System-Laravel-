@@ -21,4 +21,8 @@ class usersModel extends Model
     {
         return $this->hasMany(requestsModel::class, 'id', 'id');
     }
+    public function post_notice()
+    {
+        return $this->hasMany(postNotice::class, 'id', 'id');
+    }
 }

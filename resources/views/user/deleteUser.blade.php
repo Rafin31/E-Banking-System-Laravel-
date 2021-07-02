@@ -96,11 +96,16 @@
                                                 <td>{{$user->email}}</td>
                                                 <td>{{$user->phone_number}}</td>
                                                 <td>
-                                                    @if ($user->account_Status == 'active')
-                                                    <span class="badge badge-success px-2">
+                                                    @if ($user->account_Status == 'pending')
+                                                    <span class="badge badge-warning px-2">
                                                         {{$user->account_Status}}</span>
-                                                    @else
+
+                                                    @elseif ($user->account_Status == 'Block')
                                                     <span class="badge badge-danger px-2">
+                                                        {{$user->account_Status}}</span>
+
+                                                    @else
+                                                    <span class="badge badge-success px-2">
                                                         {{$user->account_Status}}</span>
                                                     @endif
                                                 </td>

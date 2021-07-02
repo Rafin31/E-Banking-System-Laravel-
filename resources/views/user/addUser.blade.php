@@ -80,7 +80,7 @@
 
             <div class="container-fluid">
                 {{-- Erorrs --}}
-                <div class="errors top_error alert-danger">
+                <div class="errors alert-success">
                     {{session('Add_user')}}
                 </div>
                 {{-- Errors ends --}}

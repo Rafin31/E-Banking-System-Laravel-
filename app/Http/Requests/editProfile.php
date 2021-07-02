@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class registrationForm extends FormRequest
+class editProfile extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,31 +22,19 @@ class registrationForm extends FormRequest
      * @return array
      */
     public function rules()
+
     {
         return [
             'address'    => ['required', 'min:5', 'max:50'],
-            'user_name' => ['required', 'min:3', 'max:50', 'unique:users'],
+            'user_name' => ['required', 'min:3', 'max:10', 'unique:users'],
             'email' => ['required', 'email', 'unique:users', 'min:8', 'max:30', 'email:rfc'],
-            'phone_number' => ['required', 'min:11', 'max:15',],
-            'user_type' => ['required'],
-            'password' => [
-                'required',
-                'min:8',
-                'regex:/[a-z]/',
-                'regex:/[A-Z]/',
-                'regex:/[0-9]/',
-                'regex:/[@$!%*#?&]/',
-            ],
-            'con_password' => ['required', 'same:password']
+            'phone_number' => ['required', 'min:11', 'max:15']
         ];
     }
 
     public function messages()
     {
         return [
-            'con_password.same' => 'Confirm Password Must be match',
-            'con_password.required' => 'Confirm Password required',
-            'password.required' => 'Password required',
             'email.email' => 'Invalid email address',
             'user_name.required' => 'User Name required ',
             'email.required' => 'Email required ',

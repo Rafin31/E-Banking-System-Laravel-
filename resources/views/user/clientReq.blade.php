@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('head.head' , ['title' => " Client Requests "] )
+@include('head.head' , ['title' => " Pending Requests "] )
 
 <body>
+    <style>
+        .errors {
+            text-align: center;
+            font-size: 25px;
+        }
+    </style>
 
     <!--*******************
             Preloader start
@@ -65,192 +71,97 @@
             <!-- row -->
 
             <div class="container-fluid">
+                <div class="errors alert-success">{{session('request')}}</div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Pending</h4>
+                                <h4 class="card-title">Pending Requests</h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
                                                 <th>User Name</th>
-                                                <th>User type</th>
-                                                <th>Address</th>
-                                                <th>Email</th>
-                                                <th>Phone Number</th>
-                                                <th>Request type</th>
-                                                <th>Acount Status</th>
+                                                <th>Request Type</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-warning px-2">Massage Services </span></td>
-                                                <td><span class="badge badge-warning px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Approve</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Approve</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-warning px-2">Massage Services</span></td>
-                                                <td><span class="badge badge-warning px-2">Pending</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Approve</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Approve</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                            @foreach ($request as $request)
 
-                                            </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-warning px-2">Massage Services</span></td>
-                                                <td><span class="badge badge-warning px-2">Pending</span></td>
+                                                <td>{{$request->id}}</td>
+                                                <td>{{$request->user_name}}</td>
+                                                <td>{{$request->request_type}}</td>
+                                                <td>{{$request->description}}</td>
                                                 <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Approve</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Approve</button>
+                                                    @if ($request->status == 'Pending')
+                                                    <span class="badge badge-warning px-2">
+                                                        {{$request->status}}</span>
+
+                                                    @else
+                                                    <span class="badge badge-success px-2">
+                                                        {{$request->status}}</span>
+                                                    @endif
+
+                                                </td>
+                                                <td>
+                                                    <form method="POST" action="{{url('/dashbord/clientReq')}}">
+                                                        @csrf
+                                                        {{-- @method('DELETE') --}}
+                                                        <div class="bootstrap-modal">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal" data-target="#basicModal"
+                                                                onclick="updateId('{{$request->id}}')">Approve</button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="basicModal">
+                                                                <input type="hidden" id="request_id" name="request_id"
+                                                                    value="{{$request->id}}"></input>
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Confirmation</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal"><span>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Are you sure, You want
+                                                                            to
+                                                                            Approve?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Approve</button>
+
+
+                                                                            {{-- <a type='submit' href="/dashbord/deleteUser"
+                                                                                class="btn btn-primary">Delete</a> --}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-warning px-2">Massge Services</span></td>
-                                                <td><span class="badge badge-warning px-2">Pending</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal"
-                                                            data-target="#basicModal">Approve</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Approve</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                            @endforeach
 
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
                                                 <th>User Name</th>
-                                                <th>User type</th>
-                                                <th>Address</th>
-                                                <th>Email</th>
-                                                <th>Phone Number</th>
-                                                <th>Request type</th>
-                                                <th>Acount Status</th>
+                                                <th>Request Type</th>
+                                                <th>Description</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
                                         </tfoot>
@@ -288,6 +199,12 @@
         Scripts
     ***********************************-->
     @include('scripts.scripts')
+
+    <script>
+        function updateId(id) {
+            $('#request_id').val(id)
+        }
+    </script>
 
 </body>
 

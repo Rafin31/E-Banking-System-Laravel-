@@ -55,6 +55,7 @@
                                 </form>
                                 {{-- Errors --}}
                                 <div align='center' class="errors alert-danger">{{session('msg')}}</div>
+                                <div align='center' class="errors alert-success">{{session('change_password')}}</div>
                                 {{-- Errors end --}}
                                 <p class="mt-5 login-form__footer">Dont have account? <a
                                         href="{{ route('registration.register')}}" class="text-primary">Sign Up</a> now

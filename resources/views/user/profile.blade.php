@@ -65,7 +65,7 @@
             <!-- row -->
 
             <div class="container-fluid">
-
+                <div class="errors alert-success">{{session('msg')}}</div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
@@ -73,18 +73,17 @@
                                 <div class="media align-items-center mb-4">
                                     <img class="mr-3" src="images/avatar/11.png" width="80" height="80" alt="">
                                     <div class="media-body">
-                                        <h3 class="mb-0">Pikamy Cha</h3>
-                                        <p class="text-muted mb-0">Admin</p>
+                                        <h3 class="mb-0">{{$user["user_name"]}}</h3>
+                                        <p class="text-muted mb-0">{{$user["user_type"]}}</p>
                                     </div>
                                 </div>
 
                                 <div class="row mb-5">
                                     <div class="col-12 text-center">
-                                        <!-- onclick="window.location='http://domain.com/users/index'" -->
                                         <a style="color: white" href="{{route('user.edit__profile')}}"
                                             class="btn btn-danger">
                                             Edit Profile</a>
-                                        <a style="color: white" href="{{('changePassword')}}"
+                                        <a style="color: white" href="{{route('user.changePassword')}}"
                                             class="btn btn-danger w-auto"> Change Password</a>
                                     </div>
                                 </div>
@@ -110,15 +109,19 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
+
                                                         <tr>
-                                                            <th>1</th>
-                                                            <td>Ragner</td>
-                                                            <td> xyz22@gmail.com</td>
-                                                            <td class="color-primary">+8801786306597</td>
-                                                            <td class="color-primary">Gulshan</td>
-                                                            <td><span class="badge badge-primary px-2">Admin</span>
+                                                            <td> {{ $user["id"] }} </td>
+                                                            <td>{{$user["user_name"]}}</td>
+                                                            <td> {{$user["email"]}}</td>
+                                                            <td class="color-primary">{{$user["phone_number"]}}</td>
+                                                            <td class="color-primary">{{$user["address"]}}</td>
+                                                            <td><span
+                                                                    class="badge badge-primary px-2">{{$user["user_type"]}}</span>
                                                             </td>
                                                         </tr>
+
+
                                                     </tbody>
                                                 </table>
                                             </div>

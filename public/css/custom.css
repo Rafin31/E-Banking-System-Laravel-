@@ -1,0 +1,18 @@
+table,
+td {
+    font-size: 1rem;
+    color: black;
+    font-weight: 500;
+}
+
+.badge {
+    font-size: 1rem;
+    letter-spacing: 0.2rem;
+    text-transform: uppercase;
+}
+
+.errors {
+    line-height: 25px;
+    font-size: 1rem !important;
+    text-align: center;
+}
