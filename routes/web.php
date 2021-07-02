@@ -28,6 +28,7 @@ Route::post('/login/registration', "registrationcontroller@registration");
 //-----------------------------Session Check-------------------------------------
 Route::group(['middleware' => ['sessionCheck']], function () {
 
+
     //----------------------------Admin Check start here-----------------------------------------------
     Route::group(['middleware' => ['adminCheck']], function () {
         Route::get('/dashbord', "loginController@dashbord")->name("user.dashbord");
@@ -75,5 +76,61 @@ Route::group(['middleware' => ['sessionCheck']], function () {
         Route::get('/dashbord/userList/export', "userController@export");
     });
     //-------------------------Admin check Ends Here--------------------------------------
+     //Client Start
+
+    Route::get('/login/index',"clientController@index")->name("client.index");
+
+    Route::get('/index/Withdraw',"clientController@Withdraw")->name("Withdraw");
+    Route::post('/index/Withdraw',"clientController@WithdrawDone");
+
+    Route::get('/index/Send_Money',"clientController@Send_Money")->name("Send_Money");
+    Route::post('/index/Send_Money',"clientController@Send_MoneyDone");
+    
+    Route::get('/index/Electricity',"clientController@Electricity")->name("Electricity");
+    Route::post('/index/Electricity',"clientController@ElectricityDone");
+    
+    Route::get('/index/Exchange_Currency',"clientController@Exchange_Currency")->name("Exchange_Currency");
+    Route::post('/index/Exchange_Currency',"clientController@Exchange_Currencydone");
+
+    Route::get('/index/Gas',"clientController@Gas")->name("Gas");
+    Route::post('/index/Gas',"clientController@gasdone");
+
+    Route::get('/index/Water',"clientController@Water")->name("Water");
+    Route::post('/index/Water',"clientController@Waterdone");
+
+    Route::get('/index/Internet',"clientController@Internet")->name("Internet");
+    Route::post('/index/Internet',"clientController@Internetdone");
+
+    Route::get('/index/Telephone',"clientController@Telephone")->name("Telephone");
+    Route::post('/index/Telephone',"clientController@Telephonedone");
+
+    Route::get('/index/Education',"clientController@Education")->name("Education");
+    Route::post('/index/Education',"clientController@Educationdone");
+
+    Route::get('/index/Credit_Card',"clientController@Credit_Card")->name("Credit_Card");
+    Route::post('/index/Credit_Card',"clientController@Credit_Carddone");
+
+    Route::get('/index/Recharge_money',"clientController@Recharge_money")->name("Recharge_money");
+    Route::post('/index/Recharge_money',"clientController@Recharge_moneydone");
+
+    Route::get('/index/transaction',"clientController@transaction")->name("Transaction");
+
+    Route::get('/index/changePassword',"clientController@changepassword")->name("changePassword");
+    Route::post('/index/changePassword',"clientController@changepassworddone");
+
+    Route::get('/index/Apply',"clientController@Apply")->name("Apply");
+    Route::post('/index/Apply',"clientController@Applydone"); 
+
+    Route::get('/index/profile',"clientController@Profile")->name("Profile");
+
+    Route::get('/index/Edit_Profile',"clientController@Edit_Profile")->name("Edit_Profile");
+    Route::post('/index/Edit_Profile',"clientController@Edit_Profiledone");
+
+    Route::get('/index/Contact',"clientController@Contact")->name("Contact");
+    Route::post('/index/Contact',"clientController@Contactdone");
+    
+    
+    Route::get('/index/logout',"clientController@logout")->name("client.logout");
+    
 });
 //---------------------------sessoion check Ends here-----------------------------------------

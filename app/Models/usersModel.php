@@ -21,10 +21,13 @@ class usersModel extends Model
     {
         return $this->hasMany(requestsModel::class, 'id', 'id');
     }
+
+
     public function post_notice()
     {
         return $this->hasMany(postNotice::class, 'id', 'id');
     }
+
     public function transaction()
     {
         return $this->hasMany(transactionModel::class, 'id', 'id');
@@ -34,8 +37,11 @@ class usersModel extends Model
         return $this->hasOne(clientModel::class, 'id', 'id');
     }
 
+
+
     // public function post_notice()
     // {
     //     return $this->hasMany(postNotice::class, 'id', 'id');
     // }
+
 }
