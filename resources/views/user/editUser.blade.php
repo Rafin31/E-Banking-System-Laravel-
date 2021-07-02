@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('head.head' , ['title' => " Edit User "] )
+@include('head.head' , ['title' => "Edit User"] )
 
 <body>
 
@@ -69,12 +69,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Edit</h4>
+                                <h4 class="card-title">Edit Users</h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
                                                 <th>User Name</th>
                                                 <th>User type</th>
                                                 <th>Address</th>
@@ -85,160 +85,47 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Edit</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Save
-                                                                            Changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Edit</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Save
-                                                                            Changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                            @foreach ($users as $user)
 
-                                            </tr>
                                             <tr>
-                                                <td>3</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
+                                                <td>{{$user->id}}</td>
+                                                <td>{{$user->user_name}}</td>
+                                                <td><span class="badge badge-info px-2">{{$user->user_type}}</span>
+                                                </td>
+                                                <td>{{$user->address}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone_number}}</td>
                                                 <td>
+
+                                                    @if ($user->account_Status == 'pending')
+                                                    <span class="badge badge-warning px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @elseif ($user->account_Status == 'Block')
+                                                    <span class="badge badge-danger px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @else
+                                                    <span class="badge badge-success px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @endif
+
+                                                </td>
+                                                <td>
+                                                    {{-- @method('DELETE') --}}
                                                     <div class="bootstrap-modal">
                                                         <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Edit</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Save
-                                                                            Changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
+                                                        <a href="{{url('/dashbord/completeEdit/'.$user->id)}}"
+                                                            class="btn btn-primary">Edit</a>
+                                                        {{-- onclick="updateId('{{$user->id}}')" --}}
                                                     </div>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Edit</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Save
-                                                                            Changes</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                            @endforeach
 
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
                                                 <th>User Name</th>
                                                 <th>User type</th>
                                                 <th>Address</th>
@@ -282,6 +169,12 @@
         Scripts
     ***********************************-->
     @include('scripts.scripts')
+
+    {{-- <script>
+        function updateId(id) {
+            $('#delete_user_id').val(id)
+        }
+    </script> --}}
 
 </body>
 

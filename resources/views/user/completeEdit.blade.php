@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@include('head.head' , ['title' => " Add User "] )
+@include('head.head' , ['title' => " Complete Edit "] )
 
 <body>
 
@@ -80,7 +80,7 @@
 
             <div class="container-fluid">
                 {{-- Erorrs --}}
-                <div class="errors alert-success">
+                <div class="errors top_error alert-danger">
                     {{session('Add_user')}}
                 </div>
                 {{-- Errors ends --}}
@@ -97,8 +97,8 @@
                                                         class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <select class="form-control" name="user_type" id="val-skill"
-                                                        name="val-skill">
+                                                    <select class="form-control" disabled name="user_type"
+                                                        id="val-skill" name="val-skill">
                                                         <option value="">User Type</option>
                                                         <option value="clients">Clients</option>
                                                         <option value="bank_manager">Bank Manager</option>
@@ -117,18 +117,27 @@
                                             </div>
 
                                             <div class="form-group row">
+                                                <label class="col-lg-4 col-form-label" for="val-username">User Id <span
+                                                        class="text-danger">*</span>
+                                                </label>
+                                                <div class="col-lg-6">
+                                                    <input type="text" class="form-control" id="val-username"
+                                                        name="user_id" value="{{$users["id"]}}" disabled>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label" for="val-username">Username <span
                                                         class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-username"
-                                                        name="user_name" placeholder="Enter a username..">
+                                                        name="user_name" value="{{$users["user_name"]}}">
                                                     {{-- Errors --}}
                                                     <div class="errors alert-danger">
                                                         {{$errors->first('user_name')}}
-
                                                     </div>
-
                                                     {{-- Errors End --}}
                                                 </div>
 
@@ -139,53 +148,15 @@
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-email" name="email"
-                                                        placeholder="Your valid email..">
+                                                        value="{{$users["email"]}}">
                                                     {{-- Errors --}}
                                                     <div class="errors alert-danger">
                                                         {{$errors->first('email')}}
-
                                                     </div>
-
                                                     {{-- Errors End --}}
                                                 </div>
                                             </div>
 
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label" for="val-password">Password <span
-                                                        class="text-danger">*</span>
-                                                </label>
-                                                <div class="col-lg-6">
-                                                    <input type="password" class="form-control" id="val-password"
-                                                        name="password" placeholder="Choose a safe one..">
-                                                    {{-- Errors --}}
-                                                    <div class="errors alert-danger">
-                                                        {{$errors->first('password')}}
-
-                                                    </div>
-
-                                                    {{-- Errors End --}}
-                                                </div>
-
-                                            </div>
-
-                                            <div class="form-group row">
-                                                <label class="col-lg-4 col-form-label"
-                                                    for="val-confirm-password">Confirm Password <span
-                                                        class="text-danger">*</span>
-                                                </label>
-                                                <div class="col-lg-6">
-                                                    <input type="password" class="form-control"
-                                                        id="val-confirm-password" name="con_password"
-                                                        placeholder="..and confirm it!">
-                                                    {{-- Errors --}}
-                                                    <div class="errors alert-danger">
-                                                        {{$errors->first('con_password')}}
-
-                                                    </div>
-
-                                                    {{-- Errors End --}}
-                                                </div>
-                                            </div>
 
                                             <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label"
@@ -194,7 +165,7 @@
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-confirm-password"
-                                                        name="address" placeholder="Address">
+                                                        name="address" value="{{$users["address"]}}">
                                                     {{-- Errors --}}
                                                     <div class="errors alert-danger">
                                                         {{$errors->first('address')}}
@@ -211,7 +182,7 @@
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-phoneus"
-                                                        name="phone_number" placeholder="+88 01754789658">
+                                                        name="phone_number" value="{{$users["phone_number"]}}">
                                                     {{-- Errors --}}
                                                     <div class="errors alert-danger">
                                                         {{$errors->first('phone_number')}}
@@ -225,7 +196,7 @@
                                             <div class="form-group row">
                                                 <div class="col-lg-8 ml-auto">
                                                     <button type="submit"
-                                                        class="btn btn-primary submit w-75">Add</button>
+                                                        class="btn btn-primary submit w-75">Edit</button>
                                                 </div>
                                             </div>
                                         </form>

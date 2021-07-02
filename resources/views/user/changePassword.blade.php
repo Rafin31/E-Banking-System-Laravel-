@@ -66,20 +66,25 @@
             <!-- row -->
 
             <div class="container-fluid">
+                <div class="error alert-danger">{{session('change_password')}}</div>
                 <div class="container-fluid">
                     <div class="row justify-content-center">
                         <div class="col-lg-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-validation">
-                                        <form class="form-valide" action="#" method="post">
+                                        <form class="form-valide" action="{{url('/dashbord/profile/changePassword')}}"
+                                            method="post">
+                                            @csrf
                                             <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label" for="val-skill"> Current Password
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Your current password"
-                                                        class="form-control" name="current_passwrod">
+                                                    <input type="password" placeholder="Your current password"
+                                                        class="form-control" name="current_password">
+                                                    <div class="error alert-danger">
+                                                        {{$errors->first("current_password")}}</div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -87,8 +92,10 @@
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Choose a new password"
-                                                        class="form-control" name="new_passwrod">
+                                                    <input type="password" placeholder="Choose a new password"
+                                                        class="form-control" name="new_password">
+                                                    <div class="error alert-danger">{{$errors->first("new_password")}}
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -96,8 +103,10 @@
                                                     <span class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" placeholder="Confirm your new password"
-                                                        class="form-control" name="confirm_passwrod">
+                                                    <input type="password" placeholder="Confirm your new password"
+                                                        class="form-control" name="confirm_password">
+                                                    <div class="error alert-danger">
+                                                        {{$errors->first("confirm_password")}}</div>
                                                 </div>
                                             </div>
 
@@ -122,24 +131,25 @@
                                                                     <div class="modal-footer">
                                                                         <button type="button" class="btn btn-secondary"
                                                                             data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Unblock</button>
+                                                                        <button type="submit"
+                                                                            class="btn btn-primary">Confirm</button>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
+                                        </form>
                                     </div>
-                                    </form>
                                 </div>
+
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- #/ container -->
 

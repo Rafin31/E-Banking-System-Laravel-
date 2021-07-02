@@ -24,6 +24,7 @@ class changePassword extends FormRequest
     public function rules()
     {
         return [
+
             'current_password' => ['required'],
             'new_password' => [
                 'required',
@@ -36,7 +37,7 @@ class changePassword extends FormRequest
             'confirm_password' => ['required', 'same:new_password']
         ];
     }
- 
+
     public function messages()
     {
         return [
@@ -44,7 +45,7 @@ class changePassword extends FormRequest
             'new_password.required' => 'New Password required',
             'confirm_password.required' => 'Confirm Password required',
             'confirm_password.same' => 'Confirm Password must match with new password'
- 
+
         ];
     }
 }

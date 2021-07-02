@@ -58,7 +58,7 @@
                 <div class="col p-md-0">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="javascript:void(0)">Dashboard</a></li>
-                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Block User</a></li>
+                        <li class="breadcrumb-item active"><a href="javascript:void(0)">Home</a></li>
                     </ol>
                 </div>
             </div>
@@ -69,12 +69,12 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Block</h4>
+                                <h4 class="card-title">Block Users</h4>
                                 <div class="table-responsive">
                                     <table class="table table-hover table-bordered zero-configuration">
                                         <thead>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
                                                 <th>User Name</th>
                                                 <th>User type</th>
                                                 <th>Address</th>
@@ -85,156 +85,81 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>1</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Block</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Block</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>2</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Block</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Block</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
+                                            @foreach ($user as $user)
 
-                                            </tr>
                                             <tr>
-                                                <td>2</td>
-                                                <td>Tiger Nixon</td>
-                                                <td>Admin</td>
-                                                <td>Edinburgh</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
+                                                <td>{{$user->id}}</td>
+                                                <td>{{$user->user_name}}</td>
+                                                <td><span class="badge badge-info px-2">{{$user->user_type}}</span>
+                                                </td>
+                                                <td>{{$user->address}}</td>
+                                                <td>{{$user->email}}</td>
+                                                <td>{{$user->phone_number}}</td>
                                                 <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Block</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Block</button>
+                                                    @if ($user->account_Status == 'pending')
+                                                    <span class="badge badge-warning px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @elseif ($user->account_Status == 'Block')
+                                                    <span class="badge badge-danger px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @else
+                                                    <span class="badge badge-success px-2">
+                                                        {{$user->account_Status}}</span>
+                                                    @endif
+
+
+                                                </td>
+                                                <td>
+                                                    <form method="POST" action="{{url('/dashbord/blockUser')}}">
+                                                        @csrf
+                                                        {{-- @method('DELETE') --}}
+                                                        <div class="bootstrap-modal">
+                                                            <!-- Button trigger modal -->
+                                                            <button type="button" class="btn btn-primary"
+                                                                data-toggle="modal" data-target="#basicModal"
+                                                                onclick="updateId('{{$user->id}}')">Block</button>
+                                                            <!-- Modal -->
+                                                            <div class="modal fade" id="basicModal">
+                                                                <input type="hidden" id="block_user_id"
+                                                                    name="block_user_id" value="{{$user->id}}"></input>
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">Confirmation</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal"><span>&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">Are you sure, You want
+                                                                            to
+                                                                            Block?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button"
+                                                                                class="btn btn-secondary"
+                                                                                data-dismiss="modal">Close</button>
+                                                                            <button type="submit"
+                                                                                class="btn btn-primary">Block</button>
+
+
+                                                                            {{-- <a type='submit' href="/dashbord/deleteUser"
+                                                                                class="btn btn-primary">Delete</a> --}}
+                                                                        </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </form>
                                                 </td>
                                             </tr>
-                                            <tr>
-                                                <td>4</td>
-                                                <td>Garrett Winters</td>
-                                                <td>Admin</td>
-                                                <td>Tokyo</td>
-                                                <td>abs@gmail.com</td>
-                                                <td>+88 01578541875</td>
-                                                <td><span class="badge badge-success px-2">Active</span></td>
-                                                <td>
-                                                    <div class="bootstrap-modal">
-                                                        <!-- Button trigger modal -->
-                                                        <button type="button" class="btn btn-primary"
-                                                            data-toggle="modal" data-target="#basicModal">Block</button>
-                                                        <!-- Modal -->
-                                                        <div class="modal fade" id="basicModal">
-                                                            <div class="modal-dialog" role="document">
-                                                                <div class="modal-content">
-                                                                    <div class="modal-header">
-                                                                        <h5 class="modal-title">Confirmation</h5>
-                                                                        <button type="button" class="close"
-                                                                            data-dismiss="modal"><span>&times;</span>
-                                                                        </button>
-                                                                    </div>
-                                                                    <div class="modal-body">Are you sure?</div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="button" class="btn btn-secondary"
-                                                                            data-dismiss="modal">Close</button>
-                                                                        <button type="button"
-                                                                            class="btn btn-primary">Block</button>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </td>
-                                            </tr>
+
+                                            @endforeach
 
                                         </tbody>
                                         <tfoot>
                                             <tr>
-                                                <th>User id</th>
+                                                <th>User Id</th>
+                                                <th>User Name</th>
                                                 <th>User type</th>
                                                 <th>Address</th>
                                                 <th>Email</th>
@@ -250,21 +175,22 @@
                     </div>
                 </div>
             </div>
-
-
-
-            <!-- #/ container -->
         </div>
-        <!--**********************************
+
+
+
+        <!-- #/ container -->
+    </div>
+    <!--**********************************
             Content body end
         ***********************************-->
 
 
-        <!--**********************************
+    <!--**********************************
             Footer start
         ***********************************-->
-        @include('footer.footer')
-        <!--**********************************
+    @include('footer.footer')
+    <!--**********************************
             Footer end
         ***********************************-->
     </div>
@@ -276,6 +202,12 @@
         Scripts
     ***********************************-->
     @include('scripts.scripts')
+
+    <script>
+        function updateId(id) {
+            $('#block_user_id').val(id)
+        }
+    </script>
 
 </body>
 

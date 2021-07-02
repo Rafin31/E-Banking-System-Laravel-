@@ -34,6 +34,7 @@ Route::group(['middleware' => ['sessionCheck']], function () {
         Route::get('/dashbord', "loginController@dashbord")->name("user.dashbord");
 
         Route::get('/dashbord/userList', "userController@userList")->name("user.user_list");
+        Route::post('/dashbord/userList', "userController@ajaxSearch")->name('ajax');
 
         Route::get('/dashbord/userServices', "userController@userServices")->name("user.services");
 
@@ -44,15 +45,35 @@ Route::group(['middleware' => ['sessionCheck']], function () {
         Route::post('/dashbord/deleteUser', "userController@destroy");
 
         Route::get('/dashbord/editUser', "userController@editUser")->name("user.edit_user");
+        Route::get('/dashbord/completeEdit/{id}', "userController@completeEdit")->name("completeEdit");
+        Route::post('/dashbord/completeEdit/{id}', "userController@editingOparetion");
+
+
         Route::get('/dashbord/blockUser', "userController@blockUser")->name("user.block_user");
+        Route::post('/dashbord/blockUser', "userController@blockUserOparetion")->name("user.block_user");
+
         Route::get('/dashbord/pendingUser', "userController@pendingUser")->name("user.pending_user");
+        Route::post('/dashbord/pendingUser', "userController@pendingUserOparation");
+
         Route::get('/dashbord/unblockUser', "userController@unblockUser")->name("user.unblock_user");
+        Route::post('/dashbord/unblockUser', "userController@unblockOperation");
+
         Route::get('/dashbord/clientReq', "userController@clientReq")->name("user.client_req");
+        Route::post('/dashbord/clientReq', "userController@clientReqOperation");
+
         Route::get('/dashbord/profile', "userController@profile")->name("user.profile");
-        Route::get('/dashbord/editProfile', "userController@editProfile")->name("user.edit_profile");
-        Route::get('/profile/editProfile', "userController@editProfile")->name("user.edit__profile");
-        Route::get('/dashbord/changePassword', "userController@changePassword")->name("user.changePassword");
-        Route::get('/dashbord/postNotices', "userController@postNotices")->name("user.post_notices");
+
+        Route::get('/dashbord/profile/editProfile', "userController@editProfile")->name("user.edit__profile");
+        //Route::get('/dashbord/profile/editProfile', "userController@editProfile")->name("user.edit__profile");
+        Route::post('/dashbord/profile/editProfile', "userController@editProfileOparetion");
+
+        Route::get('/dashbord/profile/changePassword', "userController@changePassword")->name("user.changePassword");
+        Route::post('/dashbord/profile/changePassword', "userController@changePasswordOperation");
+
+        Route::get('/dashbord/postNotices', "userController@postNotices")->name("user.postNotices");
+        Route::post('/dashbord/postNotices', "userController@postNoticesOperation")->name("user.postNotices");
+
+        Route::get('/dashbord/userList/export', "userController@export");
     });
     //-------------------------Admin check Ends Here--------------------------------------
      //Client Start
