@@ -35,7 +35,13 @@ class loginController extends Controller
             $req->session()->put('user_name', $req->user_name);
             $req->session()->put('user_id', $user['id']);
             $req->session()->put('user_type', $user['user_type']);
-            return redirect()->route('user.dashbord');
+            if($user['user_type'] == 'admin'){
+                return redirect()->route('user.dashbord'); //admin
+            }
+           
+            elseif($user['user_type'] == 'clients'){
+                return redirect()->route('client.index'); //client
+            }
         } else {
             $req->session()->flash('msg', 'invaild User Name or password');
             return redirect()->route('login.login');

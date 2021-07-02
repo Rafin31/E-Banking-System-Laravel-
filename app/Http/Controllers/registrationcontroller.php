@@ -40,10 +40,10 @@ class registrationcontroller extends Controller
             $login->save();
             DB::commit();
             return redirect()->route('login.login');
-        } catch (\Throwable $th) {
+        } catch(\Throwable $th) {
             DB::rollBack();
             echo "Something Went Wrong";
-            //throw $th;
+            throw $th;
         }
         //return usersModel::find(1014)->login;
     }
