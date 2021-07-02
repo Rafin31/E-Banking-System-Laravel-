@@ -75,11 +75,23 @@
                 <div class="message alert-success">{{session("edit")}}</div>
                 <div class="message alert-success">{{session("unblock")}}</div>
                 <div class="message alert-danger">{{session("block")}}</div>
+                <div class="message alert-danger">{{session("msg")}}</div>
                 <div class="message alert-success">{{session("approve")}}</div>
+
+                <div class="export w-100 ">
+                    <a href="{{url('/dashbord/userList/export')}}" class="btn btn-dark p-2 w-100 mb-2">Export</a>
+                </div>
                 <div class="row">
                     <div class="col-12">
                         <div class="card">
                             <div class="card-body">
+
+                                <form method="POST">
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="search" placeholder="Search">
+                                    </div>
+                                </form>
+
                                 <h4 class="card-title">Client Lists</h4>
                                 <div class="table-responsive">
                                     <table class="table table-striped table-bordered zero-configuration">
@@ -94,7 +106,7 @@
                                                 <th>Acount Status</th>
                                             </tr>
                                         </thead>
-                                        <tbody>
+                                        <tbody id="table_body">
                                             @foreach ($users as $user)
                                             <tr>
                                                 <td>{{$user->id}}</td>
@@ -108,9 +120,11 @@
                                                     @if ($user->account_Status == 'pending')
                                                     <span class="badge badge-warning px-2">
                                                         {{$user->account_Status}}</span>
+
                                                     @elseif ($user->account_Status == 'Block')
                                                     <span class="badge badge-danger px-2">
                                                         {{$user->account_Status}}</span>
+
                                                     @else
                                                     <span class="badge badge-success px-2">
                                                         {{$user->account_Status}}</span>
@@ -165,6 +179,46 @@
         Scripts
     ***********************************-->
     @include('scripts.scripts')
+
+
+
+
+    {{-- <script>
+        $('body').on('keyup' , '#search',function () {
+    var searchQuest = $(this).val();
+    console.log(searchQuest);
+
+    $.ajax({
+        method: 'POST',
+        url: '{{route("ajax")}}',
+    dataType:'json',
+    data:{
+    '_token' : '{{csrf_token()}}',
+    searchQuest: searchQuest,
+    },
+    success: function(res){
+    var tableRow = '';
+    $('#table_body').html('');
+
+    $.each(res, function (index , value) {
+    var tableRow = "<tr>
+        <td>"+value.user_id+"</td>
+    </tr>";
+
+    $('#table_body').append(tableRow);
+    });
+    }
+
+    });
+
+    });
+
+
+    </script> --}}
+
+
+
+
 </body>
 
 </html>

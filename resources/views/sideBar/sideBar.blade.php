@@ -53,13 +53,12 @@
             </a>
             <ul aria-expanded="false">
                 <li><a href="{{route('user.profile')}}">Profile</a></li>
-                <li><a href="{{route('user.edit_profile')}}">Edit Profile</a></li>
             </ul>
         </li>
 
 
         <li>
-            <a href="{{route('user.post_notices')}}" aria-expanded="false">
+            <a href="{{route('user.postNotices')}}" aria-expanded="false">
                 <i class="fa fa-plus"></i><span class="nav-text">Post Notice</span>
             </a>
         </li>

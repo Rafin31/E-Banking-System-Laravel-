@@ -72,13 +72,17 @@
                             <div class="card">
                                 <div class="card-body">
                                     <div class="form-validation">
-                                        <form class="form-valide" action="#" method="post">
+                                        <form class="form-valide" method="post">
+                                            @csrf
                                             <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label" for="val-skill">User Id <span
                                                         class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="form-control" value="1" disabled>
+                                                    <input type="text" value="{{$user["id"]}}" class="form-control"
+                                                        disabled>
+
+
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -86,7 +90,8 @@
                                                         class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="form-control" value="Admin" disabled>
+                                                    <input type="text" class="form-control"
+                                                        value="{{$user["user_type"]}}" disabled>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -95,7 +100,8 @@
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-username"
-                                                        name="val-username" placeholder="Enter a username..">
+                                                        name="user_name" value="{{$user["user_name"]}}">
+                                                    <div class="alert-danger">{{$errors->first("user_name")}}</div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -103,17 +109,19 @@
                                                         class="text-danger">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
-                                                    <input type="text" class="form-control" id="val-email"
-                                                        name="val-email" placeholder="Your valid email..">
+                                                    <input type="text" class="form-control" id="val-email" name="email"
+                                                        value="{{$user["email"]}}">
+                                                    <div class="alert-danger">{{$errors->first("email")}}</div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-lg-4 col-form-label" for="val-email">Address <span
-                                                        class="text-danger">*</span>
+                                                        class="address">*</span>
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-email"
-                                                        name="val-email" placeholder="Your valid Address..">
+                                                        name="address" value="{{$user["address"]}}">
+                                                    <div class="alert-danger">{{$errors->first("address")}}</div>
                                                 </div>
                                             </div>
 
@@ -123,7 +131,8 @@
                                                 </label>
                                                 <div class="col-lg-6">
                                                     <input type="text" class="form-control" id="val-phoneus"
-                                                        name="val-phoneus" placeholder="+88 01754789658">
+                                                        name="phone_number" value="{{$user["phone_number"]}}">
+                                                    <div class="alert-danger">{{$errors->first("phone_number")}}</div>
                                                 </div>
                                             </div>
 

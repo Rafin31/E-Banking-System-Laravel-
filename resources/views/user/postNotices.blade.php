@@ -65,6 +65,7 @@
             <!-- row -->
 
             <div class="container-fluid">
+                <div class="errors alert-success">{{session("msg")}}</div>
 
                 <div class="col-lg-12">
                     <div class="card">
@@ -72,11 +73,16 @@
                             <h4 class="card-title">Post Notices</h4>
                             <div class="basic-form">
                                 <form method="POST">
+                                    @csrf
                                     <div class="form-group">
                                         <label>Subject:</label>
-                                        <input type='text' class="form-control mb-3" name="subject">
-                                        <label>Post:</label>
-                                        <textarea class="form-control h-150px" rows="6" id="comment"></textarea>
+                                        <input type='text' placeholder="*Maximum 255 words" class="form-control mb-3"
+                                            name="subject" required>
+
+                                        <label>Notece:</label>
+                                        <textarea name="description" class="form-control h-150px"
+                                            placeholder="*Maximum 1000 words" rows="6" id="comment" required></textarea>
+
                                         <button type="submit" name="submit"
                                             class="btn btn-primary mt-3 w-100">Post</button>
                                     </div>
