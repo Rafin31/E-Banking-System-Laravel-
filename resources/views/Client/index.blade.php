@@ -44,8 +44,12 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
+
         @include('Client_Sidebar.sidebar')
         <!--**********************************
+
+        @include('Client_Sidebar.sidebar')<!--**********************************
+
             Sidebar end
         ***********************************-->
 
@@ -73,7 +77,11 @@
                                     <div class="stat-text">Balance</div>
                                     <div class="stat-digit gradient-3-text">BDT {{$client['account_balance']}}</div>
                                 </div>
+
                             </div>
+
+                           </div>
+
                         </div>
                     </div>
 
@@ -84,8 +92,7 @@
                                     <div class="stat-text">NID Verification</div>
                                     <div class="stat-digit gradient-4-text">{{$client['nid_varification']}}</div>
                                 </div>
-
-                            </div>
+               </div>
                         </div>
                     </div>
 
@@ -96,6 +103,7 @@
                                     <div class="stat-text">Previous Withdraw</div>
                                     <div class="stat-digit gradient-4-text">{{$transaction['debit']}} </div>
                                 </div>
+
 
                             </div>
                         </div>
@@ -123,6 +131,13 @@
                         </div>
                     </div>
 
+                </div>
+
+
+                                
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>

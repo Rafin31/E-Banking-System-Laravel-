@@ -72,9 +72,13 @@
             <!-- row -->
 
             <div class="container-fluid">
+
                 <div class="export w-100 ">
                     <a href="{{url('/index/transaction/export')}}" class="btn btn-info p-2 w-100 mb-2">Export</a>
                 </div>
+
+                
+
 
                 <div class="row">
                     <div class="col-12">
