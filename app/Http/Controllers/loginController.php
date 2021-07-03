@@ -30,20 +30,11 @@ class loginController extends Controller
             ->first();
 
         //checking users
-        if ($user) {
-            //checking account status
-            if ($user['account_Status'] == 'pending') {
-
-                $req->session()->flash('msg', 'Your account is in pending');
-                return redirect()->route('login.login');
-            } elseif ($user['account_Status'] == 'Block') {
-
-                $req->session()->flash('msg', 'Your account is Blocked');
-                return redirect()->route('login.login');
-            } else {
-
+        if ($user) 
+        {
                 if (Hash::check($req->password, $user['password'])) {
-                    if ($user['user_type'] == 'admin') {
+                    if ($user['user_type'] == 'admin')
+                     {
                         $req->session()->put('status', true);
                         $req->session()->put('user_name', $req->user_name);
                         $req->session()->put('user_id', $user['id']);
@@ -57,23 +48,34 @@ class loginController extends Controller
                         $req->session()->put('user_type', $user['user_type']);
                         return redirect()->route('client.index');
                     } elseif ($user['user_type'] == 'bank_manager') {
-                        //code
+                        //manager
+                        $req->session()->put('status', true);
+                        $req->session()->put('user_name', $req->user_name);
+                        $req->session()->put('user_id', $user['id']);
+                        $req->session()->put('user_type', $user['user_type']);
+                       return redirect('manager/dashboard');
                     } elseif ($user['user_type'] == 'noney_exchange_officer') {
                         //code
                     } else {
                         $req->session()->flash('msg', 'invaild request');
                         return redirect()->route('login.login');
                     }
-                } else {
+                } 
+                else 
+                {
+
                     $req->session()->flash('msg', 'invaild User Name or password');
                     return redirect()->route('login.login');
                 }
             }
-        } else {
+            
+         else 
+         {
             $req->session()->flash('msg', 'invaild User Name or password');
             return redirect()->route('login.login');
         }
-    }
+    
+}
     public function dashbord()
     {
         return view("user.index");
