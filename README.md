@@ -12,7 +12,7 @@
 This is Summer 2020-2021 Advanced Web-Technology mid-term project where we have developed a full front-end and back-end system for an E-Banking system using Laravel framework and php myAdmin.
 
 ## How to Run
--  Clone the priject in your local repository
+-  Clone the project in your local repository
 -  Get the project database form databse/project db folder and import it into your php myAdmin local host. Must remember to name the database as <b>e-banking-system</b>.
 -  Make a file and name it .env and paste the contents of .env.example file. 
 -  Run composer update into the terminal where you cloned the project [ you need composer to do it , or you can download composer  ].
