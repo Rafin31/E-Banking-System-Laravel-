@@ -133,6 +133,9 @@ Route::group(['middleware' => ['sessionCheck']], function () {
     Route::post('/index/Contact', "clientController@Contactdone");
 
 
+
+   //Route::get('/index/logout', "clientController@logout")->name("client.logout");
+
     Route::get('/index/logout', "clientController@logout")->name("client.logout");
 });
 //---------------------------sessoion check Ends here-----------------------------------------
