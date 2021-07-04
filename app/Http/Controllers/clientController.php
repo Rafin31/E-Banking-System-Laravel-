@@ -27,6 +27,9 @@ use App\Http\Requests\exchangeCurrency;
 use App\Http\Requests\apply;
 use App\Http\Requests\editprofile;
 use App\Http\Requests\changePassword;
+use App\Exports\TransactionExport;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Models\postNotice;
 
 
 
@@ -38,8 +41,14 @@ class clientController extends Controller
         $users = usersModel::find(session('user_id'))->client;
         $transaction = usersModel::find(session('user_id'))->transaction->last();
 
+        $notice = postNotice::all()->last();
+        //echo $notice->description;
+
+
+
         return view("Client.index")->with('transaction', $transaction)
-            ->with('client', $users);
+            ->with('client', $users)
+            ->with('notice', $notice);
     }
 
     public function logout()
@@ -57,10 +66,10 @@ class clientController extends Controller
     {
         $apply = new applymodel;
         $apply->id = session('user_id');
-        
+
         $apply->request_type =  $req->apply_type;
         $apply->description = $req->description;
-        
+
 
         $apply->save();
         $req->session()->flash('msg', 'Request Submitted...Wait for Manager Confirmation');
@@ -157,8 +166,8 @@ class clientController extends Controller
     //......................Edit Profile......................//
     public function Edit_Profile()
     {
-        $user=usersModel::find(session('user_id')) ;
-        return view("Client.Edit_Profile")->with('user',$user);
+        $user = usersModel::find(session('user_id'));
+        return view("Client.Edit_Profile")->with('user', $user);
     }
 
     public function Edit_Profiledone(editprofile $req)
@@ -171,11 +180,11 @@ class clientController extends Controller
             $user->address = $req->address;
             $user->phone_number = $req->phone_number;
             $user->save();
- 
+
             $login = loginModel::find(session("user_id"));
             $login->user_name = $req->user_name;
             $login->save();
- 
+
             $req->session()->flash('msg', 'Profile updated Succefully');
             DB::commit();
             return redirect('/index/profile');
@@ -187,40 +196,44 @@ class clientController extends Controller
         }
     }
 
-     //......................Transaction......................//
+    //......................Transaction......................//
 
-     public function transaction()
-     {
-         $transaction =transactionModel :: where ("id",session('user_id'))->get() ;
-         //print_r($transaction);
-         return view ("client.transaction")->with("transaction", $transaction);
-     }
+    public function transaction()
+    {
+        $transaction = transactionModel::where("id", session('user_id'))->get();
+        //print_r($transaction);
+        return view("client.transaction")->with("transaction", $transaction);
+    }
+
+    public function transactionExport()
+    {
+        return Excel::download(new TransactionExport, 'Transacrions.xlsx');
+    }
 
 
 
-     //......................Change Password......................//
+    //......................Change Password......................//
 
     public function changePassword()
     {
         return view("Client.changePassword");
     }
-     
+
     public function changePassworddone(changePassword $req)
     {
         $password = usersModel::find(session('user_id'))->login;
-        
+
         if (Hash::check($req->current_password, $password['password'])) {
             $user = loginModel::find(session("user_id"));
             $user->password = bcrypt($req->confirm_password);
             $user->save();
- 
+
             $req->session()->flash("change_password", "password changed successfully");
             return redirect()->route('logout');
         } else {
             $req->session()->flash("change_password", "password didn't match with current password");
             return redirect('/index/changePassword');
-    }
-
+        }
     }
     //......................EDUCATION......................//
 
@@ -357,6 +370,7 @@ class clientController extends Controller
     {
         return view("Client.Exchange_Currency");
     }
+
     public function Exchange_Currencydone(exchangeCurrency $req)
     {
         $ex_money = new exchangecurrencymodel();
@@ -365,7 +379,7 @@ class clientController extends Controller
         $ex_money->exchange_amount = $req->ex_amount;
         $ex_money->exchange_to = $req->ex_to;
         $ex_money->Date = $req->date;
-        
+
 
         $ex_money->save();
         $req->session()->flash('msg', 'Collect money from the office');
@@ -563,9 +577,9 @@ class clientController extends Controller
 
     public function profile()
     {
-        $profile =usersModel::find(session('user_id')) ;
-       // echo array($profile);
-        return view ("client.profile")->with("user", $profile);
+        $profile = usersModel::find(session('user_id'));
+        // echo array($profile);
+        return view("client.profile")->with("user", $profile);
     }
 
     //......................Send Money......................//

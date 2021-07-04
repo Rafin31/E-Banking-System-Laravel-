@@ -2,7 +2,7 @@
 <html lang="en">
 
 @include('head.head' , ['title' => " index "] )
- 
+
 <body>
 
     <!--*******************
@@ -44,7 +44,8 @@
         <!--**********************************
             Sidebar start
         ***********************************-->
-        @include('Client_Sidebar.sidebar')<!--**********************************
+        @include('Client_Sidebar.sidebar')
+        <!--**********************************
             Sidebar end
         ***********************************-->
 
@@ -72,7 +73,7 @@
                                     <div class="stat-text">Balance</div>
                                     <div class="stat-digit gradient-3-text">BDT {{$client['account_balance']}}</div>
                                 </div>
-                           </div>
+                            </div>
                         </div>
                     </div>
 
@@ -83,7 +84,7 @@
                                     <div class="stat-text">NID Verification</div>
                                     <div class="stat-digit gradient-4-text">{{$client['nid_varification']}}</div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
@@ -95,11 +96,35 @@
                                     <div class="stat-text">Previous Withdraw</div>
                                     <div class="stat-digit gradient-4-text">{{$transaction['debit']}} </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-sm-12 col-lg-12 ">
+                        <div class="card h-75" style="height: 200px !important;">
+                            <h5 class="card-header">Notice</h5>
+                            <div class="stat-widget-one">
+
+                                <div class="stat-content">
+
+                                    <div class="stat-digit gradient-4-text badge-info mb-2">{{$notice->description}}
+                                    </div>
+                                    <div>
+                                        <p class="">Tag : {{$notice->subject}}</p>
+                                        <p>Date : {{$notice->post_date}}</p>
+                                    </div>
+
+
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
+
             </div>
             <!-- #/ container -->
         </div>

@@ -62,7 +62,12 @@ class loginController extends Controller
                         $req->session()->put('user_type', $user['user_type']);
                         return redirect()->route('user.dashbord');
                     } elseif ($user['user_type'] == 'clients') {
-                        //code
+                        // client
+                        $req->session()->put('status', true);
+                        $req->session()->put('user_name', $req->user_name);
+                        $req->session()->put('user_id', $user['id']);
+                        $req->session()->put('user_type', $user['user_type']);
+                        return redirect()->route('client.index');
                     } elseif ($user['user_type'] == 'bank_manager') {
                         //code
                     } elseif ($user['user_type'] == 'noney_exchange_officer') {
