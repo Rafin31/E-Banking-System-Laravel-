@@ -28,6 +28,7 @@ Route::post('/login/registration', "registrationcontroller@registration");
 //-----------------------------Session Check-------------------------------------
 Route::group(['middleware' => ['sessionCheck']], function () {
 
+
     //----------------------------Admin Check start here-----------------------------------------------
     Route::group(['middleware' => ['adminCheck']], function () {
         Route::get('/dashbord', "loginController@dashbord")->name("user.dashbord");
@@ -75,6 +76,93 @@ Route::group(['middleware' => ['sessionCheck']], function () {
         Route::get('/dashbord/userList/export', "userController@export");
     });
     //-------------------------Admin check Ends Here--------------------------------------
+
+    //----------------------------Manager Check start here-----------------------------------------------
+
+Route::get('/manager/logout','ManagerController@logout');
+
+Route::get('/manager/dashboard',function ()
+{
+    return view('mngr.dashboard.dashboard');
+}); 
+
+Route::get('/mgruserlist', function () {
+    return view('mngr.userlist');
+});
+Route::get('/manager/addclient', function () {
+    return view('mngr.addclient');
+});
+Route::post('/manager/addclient','ManagerController@addClient');
+
+Route::get('/manager/clientlist','ManagerController@getAllClient');
+
+Route::get('/manager/blockclient/{id}','ManagerController@blockDetails');
+Route::post('manager/blockclient/{id}','ManagerController@blockClient');
+
+Route::get('manager/applicationdelete/{id}','ManagerController@acceptApplication');
+Route::post('manager/applicationdelete/{id}','ManagerController@confirmApplication');
+
+
+
+Route::get('/manager/addemployee', function () {
+    return view('mngr.addemployee');
+});
+Route::get('/manager/calculate','ManagerController@calculateProfit');
+
+Route::post('/manager/addemployee','ManagerController@addEmployee');
+Route::get('/manager/application','ManagerController@getAllReq');
+Route::get('/manager/employee','ManagerController@getAllEmployee');
+
+
+Route::get('/manager/viewreport','ManagerController@getReport');
+
+
+
+Route::get('/manager/transactions','ManagerController@getAllTrans');
+Route::get('/manager/employee/salary','ManagerController@getAllSalary');
+Route::get('/manager/employee/reportingtime','ManagerController@getReportingTime');
+Route::get('/manager/clients','clientlistpdfproducer@index');
+
+Route::get('/manager/printfinancial','financialPdfPrintManager@index');
+
+Route::get('/manager/financial','ManagerController@getFinancial');
+
+Route::get('/manager/deal', function () {
+    return view('mngr.deal');
+});
+Route::get('/manager/deallist', function () {
+    return view('mngr.deal.dealList');
+});
+
+Route::post('/manager/deal','ManagerController@addDeal');
+
+Route::get('/manager/currency', function () {
+    return view('mngr.currency');
+});
+
+Route::get('/manager/report', function () {
+    return view('mngr.report');
+});
+Route::get('/manager/officials', function () {
+    return view('mngr.officials');
+});
+
+Route::get('/manager/meeting/add', function () {
+    return view('mngr.meeting.addmeeting');
+});
+Route::post('/manager/meeting/add','ManagerController@addMeeting');
+
+Route::get('/manager/meeting/list','ManagerController@getAllMeeting');
+Route::get('/manager/dashboard/profile','ManagerController@getProfile');
+
+Route::get('/manager/bug/add', function () {
+    return view('mngr.bug.addBugReport');
+});
+Route::post('/manager/bug/add','ManagerController@addBugReport');
+
+
+
+//-------------------------Manager check Ends Here--------------------------------------
 
 
 
@@ -133,9 +221,121 @@ Route::group(['middleware' => ['sessionCheck']], function () {
     Route::post('/index/Contact', "clientController@Contactdone");
 
 
-
-   //Route::get('/index/logout', "clientController@logout")->name("client.logout");
-
     Route::get('/index/logout', "clientController@logout")->name("client.logout");
+
+     
+    
+
 });
 //---------------------------sessoion check Ends here-----------------------------------------
+
+
+//--------------------------Money Exchange Officer-------------------------
+
+Route::get('/login/meo', "LoginMeoController@index");
+Route::post('/login/meo', "LoginMeoController@verify");
+Route::get('/logout/meo', "LogoutController@logout");
+
+
+// Route::group(['middleware'=>['sessionMeo']],function()
+// {
+
+Route::group(['middleware'=>['meo']],function()
+{
+    Route::get('/homeMeo', "HomeMeoController@index");
+    Route::get('/requestView', "reqController@index");
+    Route::get('/addRequest', "reqController@show");
+    Route::post('/addRequest', "reqController@insert");
+
+    Route::get('/editRequest', "reqController@editview");
+    Route::get('/editRequest/{id}', "reqController@edit");
+    Route::post('/editRequest/{id}', "reqController@update");
+
+
+    Route::get('/viewRequest', "reqController@detailsView");
+    Route::get('/detailsRequest/{id}', "reqController@details");
+
+
+    Route::get('/deleteRequest', "reqController@deleteview");
+    Route::get('/deleteRequest/{id}', "reqController@delete");
+    Route::post('/deleteRequest/{id}', "reqController@destroy");
+
+   
+
+    Route::get('/viewClient', "clientControl@view");
+    
+
+    Route::get('/request/moneyExchange', "ExchangeController@view");
+
+
+    //client_search
+
+    Route::get('/client_search', 'ClientSearch@index');
+    Route::get('/live_search/action', 'ClientSearch@action')->name('client_search.action');
+
+    //pdf
+
+    Route::get('/client_pdf', 'ClientPDFController@index');
+
+    Route::get('/client_pdf/pdf', 'ClientPDFController@pdf');
+
+
+    //currency Convert
+
+    Route::get('/currencyConvert', 'currencyController@index');
+    Route::post('/currencyConvert', 'currencyController@convert');
+
+
+    //Contact Manager with JSON
+
+
+    Route::get('/contact/store', 'ContactController@index');
+    Route::post('/contact/store', 'ContactController@store');
+
+
+
+    //transactions
+
+
+    Route::get('/transaction_pdf', 'TransactionPDFController@index');
+
+    Route::get('/transaction_pdf/pdf', 'TransactionPDFController@pdf');
+
+
+
+    // Review Problem
+
+    Route::get('/reviewView', "reviewController@index");
+    Route::get('/addReview', "reviewController@show");
+    Route::post('/addReview', "reviewController@insert");
+
+    Route::get('/editReview', "reviewController@editview");
+    Route::get('/editReview/{id}', "reviewController@edit");
+    Route::post('/editReview/{id}', "reviewController@update");
+
+    
+    Route::get('/deleteReview', "reviewController@deleteview");
+    Route::get('/deleteReview/{id}', "reviewController@delete");
+    Route::post('/deleteReview/{id}', "reviewController@destroy");
+
+
+    //offer
+
+    Route::get('/offerView', "OfferController@index");
+
+    Route::get('/rates', "rateController@index");
+
+    //
+
+    Route::get('/contact/store', 'ContactController1@index');
+    Route::post('/contact/store', 'ContactController1@store');
+
+
+    });
+
+
+
+
+// });
+
+
