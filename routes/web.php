@@ -243,20 +243,15 @@ Route::group(['middleware'=>['meo']],function()
     Route::get('/editRequest/{id}', "reqController@edit");
     Route::post('/editRequest/{id}', "reqController@update");
 
-
     Route::get('/viewRequest', "reqController@detailsView");
     Route::get('/detailsRequest/{id}', "reqController@details");
-
 
     Route::get('/deleteRequest', "reqController@deleteview");
     Route::get('/deleteRequest/{id}', "reqController@delete");
     Route::post('/deleteRequest/{id}', "reqController@destroy");
 
-   
 
     Route::get('/viewClient', "clientControl@view");
-    
-
     Route::get('/request/moneyExchange', "ExchangeController@view");
 
 
@@ -265,7 +260,7 @@ Route::group(['middleware'=>['meo']],function()
     Route::get('/client_search', 'ClientSearch@index');
     Route::get('/live_search/action', 'ClientSearch@action')->name('client_search.action');
 
-    //pdf
+    //Client details with pdf feature
 
     Route::get('/client_pdf', 'ClientPDFController@index');
 
@@ -286,13 +281,11 @@ Route::group(['middleware'=>['meo']],function()
 
 
 
-    //transactions
+    //transactions with pdf feature
 
 
     Route::get('/transaction_pdf', 'TransactionPDFController@index');
-
     Route::get('/transaction_pdf/pdf', 'TransactionPDFController@pdf');
-
 
 
     // Review Problem
@@ -317,7 +310,7 @@ Route::group(['middleware'=>['meo']],function()
 
     Route::get('/rates', "rateController@index");
 
-    //
+    //contact using json
 
     Route::get('/contact/store', 'ContactController1@index');
     Route::post('/contact/store', 'ContactController1@store');
