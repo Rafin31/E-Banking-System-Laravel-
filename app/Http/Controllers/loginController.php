@@ -1,98 +1,52 @@
 <?php
-
 namespace App\Http\Controllers;
+use App\Models\Meo;
+use Validator;
 
-use Illuminate\Support\Facades\Hash;
-use App\Http\Requests\loginForm;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use App\Models\loginModel;
-use App\Models\usersModel;
-use App\Models\requestsModel;
 
-class loginController extends Controller
+class LoginMeoController extends Controller
 {
     public function index()
     {
-        return view("login.login");
+        return view("login.index");
     }
-    public function logout(Request $req)
+
+
+    public function verify (Request $req)
+
+{
+    $validation = Validator::make($req->all(), [
+       'user_name' => 'required',
+        'password' => 'required|min:5',
+    ]);
+
+    
+    if ($validation->fails())
     {
-        $req->session()->flush();
-        return redirect("/login");
+        return back()
+                    ->with ('errors',$validation->errors())
+                    ->withInput();
     }
-    public function loginVarify(loginForm $req)
-    {
-        $user_name = $req->user_name;
-        $password = bcrypt($req->password);
 
-        $user = loginModel::where('user_name', $user_name)
-            ->first();
+    $user=Meo::where ('user_name',$req->user_name)
+                ->where ('password',$req->password)
+                ->where ('user_type',$req->user_type)
+                ->first();
 
-        //checking users
-        if ($user) {
-            //checking account status
-            if ($user['account_Status'] == 'pending') {
+if (count ((array)$user)>0 )
+{
+    $req->session()-> put('name',$req->user_name);
+    $req->session()-> put('user_type',$req->user_type);
+    $req->session()->put('password', $req->password);
+    return redirect ('/homeMeo');
+}
 
-
-            $req->session()->put('status', true);
-            $req->session()->put('user_name', $req->user_name);
-            $req->session()->put('user_id', $user['id']);
-            $req->session()->put('user_type', $user['user_type']);
-            if($user['user_type'] == 'admin'){
-                return redirect()->route('user.dashbord'); //admin
-            }
-           
-            elseif($user['user_type'] == 'clients'){
-                return redirect()->route('client.index'); //client
-
-                $req->session()->flash('msg', 'Your account is in pending');
-                return redirect()->route('login.login');
-            } elseif ($user['account_Status'] == 'Block') {
-
-                $req->session()->flash('msg', 'Your account is Blocked');
-                return redirect()->route('login.login');
-            } else {
-
-                if (Hash::check($req->password, $user['password'])) {
-                    if ($user['user_type'] == 'admin') {
-                        $req->session()->put('status', true);
-                        $req->session()->put('user_name', $req->user_name);
-                        $req->session()->put('user_id', $user['id']);
-                        $req->session()->put('user_type', $user['user_type']);
-                        return redirect()->route('user.dashbord');
-                    } elseif ($user['user_type'] == 'clients') {
-                        // client
-                        $req->session()->put('status', true);
-                        $req->session()->put('user_name', $req->user_name);
-                        $req->session()->put('user_id', $user['id']);
-                        $req->session()->put('user_type', $user['user_type']);
-                        return redirect()->route('client.index');
-                    } elseif ($user['user_type'] == 'bank_manager') {
-                        //code
-                    } elseif ($user['user_type'] == 'noney_exchange_officer') {
-                        //code
-                    } else {
-                        $req->session()->flash('msg', 'invaild request');
-                        return redirect()->route('login.login');
-                    }
-                } else {
-                    $req->session()->flash('msg', 'invaild User Name or password');
-                    return redirect()->route('login.login');
-                }
-
-            }
-        } else {
-            $req->session()->flash('msg', 'invaild User Name or password');
-            return redirect()->route('login.login');
-        }
-    }
-    public function dashbord()
-    {
-        return view("user.index");
-    }
-    public function signUP()
-    {
-        return view('registration.register');
-    }
+else{
+    $req->session()->flash('msg','Name Or Password is Wrong');
+    return redirect('/login/meo');
+}
+}
+   
+    
 }
