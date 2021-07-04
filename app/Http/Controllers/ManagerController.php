@@ -341,7 +341,7 @@ class ManagerController extends Controller
     $users = clientmodel::all();
     
     return view('mngr.client.clientList')->with('clientlist',$users); 
-    echo "Done";
+    
     }
     public function blockDetails($id)
     {
@@ -351,6 +351,35 @@ class ManagerController extends Controller
         
         return view('mngr.client.confirmBlock')->with('blocklist',$user); 
     }
+
+
+    public function acceptApplication($id)
+    {
+
+        $user= requesttomanagermodel::where('id', $id)
+        ->first();
+    
+    return view('mngr.application.confirmApplication')->with('blocklist',$user); 
+    }       
+
+    public function confirmApplication(Request $rq)
+    {
+
+          $user = requesttomanagermodel::where('id',$rq->id) 
+        ->first();
+        $user->status='completed';
+    
+    $user->save();
+
+
+    $users = requesttomanagermodel::all();
+    
+    return view('mngr.application.applicationList')->with('reqlist',$users); 
+    
+    }
+    
+        
+
         public function addEmployee(Request $rq)
         {
 
@@ -415,6 +444,30 @@ class ManagerController extends Controller
  
  
         return view('mngr.employee.salaryList')->with('salarylist',$users); 
+    }
+
+    
+    public function calculateProfit()
+    {
+
+            $users =   financialmodel::all();
+           
+            foreach ($users as $month)  // important: To iterate an array of object achived from model must have to have id as primary key to iterate the array
+            {
+                $profit=$month->profit;
+                $loss= $month->loss;
+                if($profit<$loss)
+                {
+                    $ultimateprofit=($profit-$loss);
+                    $month->ultimate_profit=-$ultimateprofit;
+                }
+                $ultimateprofit=$profit-$loss;
+                $month->ultimate_profit=$ultimateprofit;
+                $month->save();
+            }
+           
+            $users =   financialmodel::all();
+        return view('mngr.financial.financialList')->with('finanlciallist',$users); 
     }
     public function getAllEmployee()
     {
@@ -509,16 +562,21 @@ class ManagerController extends Controller
                 $json_data=json_encode($array_data);
                 if(file_put_contents('../resources/views/mngr/deal.json',$json_data))
                 {
-                    echo"Sueccesfully Deal Done ! ! !";
-                   
+                    echo"Sueccesfully Deal Done ! ! ! (Stored In deal.json file)";
+                   return view('mngr.deal.dealList');
                 }
                 else
                 {
-                    echo "Sorry can't make Deal . . . . ";
+                    echo "Sorry can't make Deal . . . . Error Occured";
                 }
             }
            //return view('mngr.client.clientList')->with('clientlist',$users); 
         }
     }
+
+
+
+
+    
         
 }

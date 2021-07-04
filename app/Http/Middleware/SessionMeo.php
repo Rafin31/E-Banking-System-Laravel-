@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class sessionChecker
+class SessionMeo
 {
     /**
      * Handle an incoming request.
@@ -16,15 +16,14 @@ class sessionChecker
      */
     public function handle(Request $request, Closure $next)
     {
-        if ($request->session()->has('user_name') == true)
-        if ($request->session()->has('uname') == true)
-         {
+        if ($request->session -> has ('user_name'))
+        {
+
         return $next($request);
-         }
-         else
-         {
-                $request->session()->flash('msg','Please login to acces desired page');
-                return redirect(('/manager/login'));
-         }
     }
+    else{
+        $request->session()->flash ('msg', "Invalid Request");
+        return redirect ('/login/meo');
+    }
+}
 }

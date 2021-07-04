@@ -14,13 +14,14 @@ class clientlistpdfproducer extends Controller
         $data = clientmodel::all();
 
         if ($request->has('export')) {
-            if ($request->get('export') == 'pdf') {
-                $pdf = PDF::loadView('mngr.client.index-pdf', compact('data'));
-                return $pdf->download('client-list.pdf');
+            if ($request->get('export') == 'pdf') 
+            {
+                $pdf = PDF::loadView('mngr.client.index-pdf', compact('data')); // view file to print the ultimate pdf
+                return $pdf->download('client-list.pdf');  // name of the file to be downloaded 
             }
         }
         $client=clientmodel::all();
-        return view('mngr.client.index', compact('data'))->with('clientlist',$client);
+        return view('mngr.client.index', compact('data'))->with('clientlist',$client);  // view file to construct the view for pdf 
     }
 }
 
