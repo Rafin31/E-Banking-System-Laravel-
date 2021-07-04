@@ -13,12 +13,18 @@ This is Summer 2020-2021 Advanced Web-Technology mid-term project where we have 
 
 ## How to Run
 -  Clone the priject in your local repository
--  Get the project database form databse/project db folder and import it into your php myAdmin local host. Must remember to name the database as <b>e-banking-system<b>.
+-  Get the project database form databse/project db folder and import it into your php myAdmin local host. Must remember to name the database as <b>e-banking-system</b>.
 -  Make a file and name it .env and paste the contents of .env.example file. 
 -  Run composer update into the terminal where you cloned the project [ you need composer to do it , or you can download composer  ].
 -  Run php artisan serve to turn on php local server.
 -  Go http://127.0.0.1:8000/ .
 -  Now you can preview the project .
+
+## Version
+- PHP 8.0.1
+- Laravel 8.49.1
+- Composer 2.1.1 
+
 
 
 
