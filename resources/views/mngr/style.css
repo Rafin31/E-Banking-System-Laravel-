@@ -1,0 +1,48 @@
+#g1{
+                        background-color: rgb(183, 243, 243);
+                    }
+#g2
+                    {
+                        background-color:cornflowerblue;
+                    }
+.btn{
+                        background-color: rgb(67, 140, 173);
+                        width: 700px;
+                       
+                    }
+.btn2
+                    {
+                        background-color: rgb(67, 140, 173);
+                        width: 200px;
+                       
+                    }
+                    .btn3
+                    {
+                        background-color: rgb(128, 188, 216);
+                        width: 100px;
+                       
+                    }
+                    
+.form{
+                        background-color: rgb(220, 232, 238);
+                        width: 950px;
+                        object-position: center;
+                    }
+ .fsubmit{
+                        background-color: rgb(60, 127, 158);
+                        width: 950px;
+                    }
+.listbtn{
+                        background-color: rgb(60, 127, 158);
+                        width: 400px;
+                    }
+.bg                 
+                    {
+                    background-color: aliceblue;
+
+                    }
+.bs                 
+                    {
+                    background-color: aliceblue;
+                    background-image: url("../View/image.png");
+                    }

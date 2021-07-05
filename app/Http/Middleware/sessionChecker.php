@@ -16,6 +16,7 @@ class sessionChecker
      */
     public function handle(Request $request, Closure $next)
     {
+        if ($request->session()->has('user_name') == true)
         if ($request->session()->has('uname') == true)
          {
         return $next($request);
