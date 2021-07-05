@@ -25,6 +25,9 @@ This is Summer 2020-2021 Advanced Web-Technology mid-term project where we have 
 - Laravel 8.49.1
 - Composer 2.1.1 
 
+## Few Screen-Shots of the Project
+
+<img src="https://user-images.githubusercontent.com/65537019/124504588-9d3bea00-dde9-11eb-9524-49f481c15f0b.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504592-9e6d1700-dde9-11eb-8e0c-161339259aeb.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504593-9f05ad80-dde9-11eb-8f47-83deee60d8f9.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504594-9f9e4400-dde9-11eb-8ca3-d533ef7a3313.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504596-a036da80-dde9-11eb-8f0a-d7aae5383eb2.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504597-a036da80-dde9-11eb-8a9b-9f5324e65e40.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504598-a0cf7100-dde9-11eb-86b3-183bc57c38c1.JPG" width="45%"></img> <img src="https://user-images.githubusercontent.com/65537019/124504599-a1680780-dde9-11eb-902d-0b14fe9d0437.JPG" width="45%"></img> 
 
 
 
